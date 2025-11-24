@@ -13,7 +13,6 @@ import java.io.Reader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.lang.NumberFormatException;
 
 /**
  *
@@ -32,7 +31,7 @@ public class CsvParser implements GameDataParser {
 
          try {
             Reader in = new FileReader(filePath);
-            Iterable<CSVRecord> records = CSVFormat.EXCEL.builder().setHeader().setSkipHeaderRecord(true).build().parse(in);
+            Iterable<CSVRecord> records = CSVFormat.EXCEL.builder().setHeader().setSkipHeaderRecord(true).get().parse(in);
             for (CSVRecord record : records) {
                 ArrayList< String> choices = new ArrayList<>();
                 for (char i = 'A'; i < 'E'; i++) {
