@@ -36,8 +36,8 @@ public class JsonParser implements GameDataParser {
                 JSONObject record = (JSONObject) obj;
 
                 ArrayList< String> choices = new ArrayList<>();
-                JSONArray choicesArray = (JSONArray) record.get("Options");
-                for (Object choiceObj : choicesArray) {
+                JSONObject choicesObject = (JSONObject) record.get("Options");
+                for (Object choiceObj : choicesObject.values()) {
                     choices.add((String) choiceObj);
                 }
 
