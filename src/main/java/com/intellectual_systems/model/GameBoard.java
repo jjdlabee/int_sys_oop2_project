@@ -45,7 +45,6 @@ public class GameBoard {
             }
         }
     }
-    
 
     public void setCell(String category, int value, Question question) {
         Integer col = indexes.get(category);
