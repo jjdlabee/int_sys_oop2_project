@@ -10,12 +10,17 @@ package com.intellectual_systems.model;
  * @author Jonathan
  */
 public class Turn {
+    private final Player player;
     private String currentCategory;
     private String currentQuestion;
     private String currentAnswer;
     private int currentQuestionValue;
 
-     public void setCurrentCategory(String category) {
+    public Turn(Player player) {
+        this.player = player;
+    }
+
+    public void setCurrentCategory(String category) {
         this.currentCategory = category;
     }
     public void setCurrentQuestion(String question) {
@@ -26,5 +31,21 @@ public class Turn {
     }
     public void setQuestionValue(int value){
         this.currentQuestionValue = value;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+    public String getCurrentCategory() {
+        return currentCategory;
+    }
+    public String getCurrentQuestion() {
+        return currentQuestion;
+    }
+    public String getCurrentAnswer() {
+        return currentAnswer;
+    }
+    public int getCurrentQuestionValue() {
+        return currentQuestionValue;
     }
 }
