@@ -76,8 +76,35 @@ public class GameBoard {
         }
     }
 
-    @Override
-    public String toString() {
+    public void clearCell(String category, int value) {
+        Integer col = indexes.get(category);
+        Integer row = indexes.get(value + "");
+        if (col != null && row != null && row >= 0 && row < rows) {
+            board[row + 1][col] = " ";
+        } else {
+            throw new IndexOutOfBoundsException("Invalid category or value");
+        }
+    }   
+
+    public String renderCategory(String category) {
+        StringBuilder sb = new StringBuilder();
+        Integer col = indexes.get(category);
+        if (col == null) {
+            throw new IndexOutOfBoundsException("Invalid category");
+        }
+        
+        sb.append("Category: ").append(category).append("\n");
+        sb.append("---------------------\n");
+        for (int i = 1; i < rows; i++) {
+            String cell = board[i][col] != null ? board[i][col] : " ";
+            sb.append(String.format("%-15s", cell)).append("\n");
+        }
+        sb.append("---------------------\n");
+        
+        return sb.toString();
+    }
+
+    public String renderEntireGameBoard() {
         StringBuilder sb = new StringBuilder();
         
         // Calculate column widths based on content

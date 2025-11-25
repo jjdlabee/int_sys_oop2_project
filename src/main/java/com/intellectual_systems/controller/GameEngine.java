@@ -20,42 +20,50 @@ public class GameEngine {
     private List<Player> players;
     private List<Category> categories;
     private GameBoard gameBoard;
+    private TurnManager turnManager;
 
     public GameEngine(GameState startState) {
         this.state = startState;
     }
 
-    public void renderCurrentState() {
-        state.renderCurrentState();
-    }
-
-    public void renderNextState() {
-        state.renderNextState();
-    }
-
-    public void setState(GameState state) {
-        this.state = state;
-    }
-
+    //Accessor methods
     public List<Player> getPlayers() {
-        return players;
+        return this.players;
     }
+    public GameBoard getGameBoard(){
+        return this.gameBoard;
+    }
+    public List<Category> getCategories() {
+        return this.categories;
+    }
+    public TurnManager getTurnManager(){
+        return this.turnManager;
+    }
+
+    //Mutator methods
     public void setPlayers(List<Player> players) {
         this.players = players;
-    }
-
-    public List<Category> getCategories() {
-        return categories;
     }
     public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
-
-    public GameBoard getGameBoard(){
-        return gameBoard;
-    }
-
     public void setGameBoard(GameBoard gameBoard){
         this.gameBoard = gameBoard;
     }
+    public void setState(GameState state) {
+        this.state = state;
+    }
+
+    //Game state methods
+    public void renderCurrentState() {
+        state.renderCurrentState();
+    }
+    public void renderNextState() {
+        state.renderNextState();
+    }
+
+    public void initializeTurnMangager(){
+        this.turnManager = new TurnManager(players);
+    }
+
 }

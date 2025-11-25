@@ -15,6 +15,7 @@ import com.intellectual_systems.controller.GameState;
  * @author Jonathan
  */
 public class CategorySelectState implements GameState {
+    private static final Scanner scanner = new Scanner(System.in);
     private final GameEngine gameEngine;
 
     public CategorySelectState(GameEngine gameEngine) {
@@ -23,15 +24,24 @@ public class CategorySelectState implements GameState {
 
     @Override
     public void renderCurrentState() {
-        // Implementation for rendering the category select state
         System.out.println("Select a category for the game.");
-        // Add logic to handle category selection
-        try (Scanner scanner = new Scanner(System.in)) {
-            String category = scanner.nextLine();
-            // Store selected category as needed
-            System.out.println("Category " + category + " has been selected.");
-            // After selection, transition to the next state
-            // gameEngine.setState(new NextState(gameEngine));
+       try {
+            // for(int i = 0; i < gameEngine.getCategories().size(); i++){
+            //     System.out.println((i + 1) + ". " + )
+            // }
+            // System.out.println("1. JSON");
+            // System.out.println("2. XML");
+            // System.out.println("3. CSV");
+            // System.out.print("Enter your choice (1-3): ");
+            // String choice = scanner.next();
+            // scanner.nextLine();
+            // // Store selected category as needed
+            // System.out.println("Category " + category + " has been selected.");
+            // // After selection, transition to the next state
+            // // gameEngine.setState(new NextState(gameEngine));
+        } catch(Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
+            gameEngine.renderCurrentState();
         }
     }
 
