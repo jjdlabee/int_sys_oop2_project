@@ -15,6 +15,7 @@ import java.util.Scanner;
  */
 public class PlayerSetupState implements GameState {
     private final GameEngine gameEngine;
+    private static final Scanner scanner = new Scanner(System.in);
 
     public PlayerSetupState(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
@@ -24,15 +25,16 @@ public class PlayerSetupState implements GameState {
     public void render() {
         // Implementation for rendering the player setup state
         System.out.println("Setting up players. Please enter player details.");
+
         // Add logic to handle player setup
-        try (Scanner scanner = new Scanner(System.in)) {
-            System.out.println("Enter number of players:");
-            int numPlayers = Integer.parseInt(scanner.nextLine());
-            if (numPlayers <= 0 || numPlayers > 4) {
-                System.out.println("Invalid number of players. Please try again.");
-                this.gameEngine.setState(new PlayerSetupState(gameEngine));
-                gameEngine.render();
-            }
+        System.out.println("Enter number of players:");
+        int numPlayers = Integer.parseInt(scanner.nextLine());
+
+        if (numPlayers <= 0 || numPlayers > 4) {
+            System.out.println("Invalid number of players. Please try again.");
+            this.gameEngine.setState(new PlayerSetupState(gameEngine));
+            gameEngine.render();
+        } else {
             for (int i = 1; i <= numPlayers; i++) {
                 System.out.println("Enter name for Player " + i + ":");
                 String playerName = scanner.nextLine();

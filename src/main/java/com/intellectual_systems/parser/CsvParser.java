@@ -63,10 +63,6 @@ public class CsvParser implements GameDataParser {
             }
         } catch (IOException e ) {
         }
-
-        for (Category category : categories) {
-            System.out.println(category);
-        }
     }
 
 }

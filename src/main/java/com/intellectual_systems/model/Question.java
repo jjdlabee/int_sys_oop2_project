@@ -45,8 +45,4 @@ public class Question {
         return choices;
     }
 
-    @Override
-    public String toString() {
-        return "Question{" + "questionText=" + questionText + ", answer=" + answer + ", category=" + category + ", choices=" + choices + ", value=" + value + '}';
-    }
 }

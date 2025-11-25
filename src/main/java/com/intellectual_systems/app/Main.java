@@ -14,19 +14,21 @@ import java.util.Scanner;
  * @author Jonathan
  */
 public class Main {
+    private static final Scanner scanner = new Scanner(System.in);
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        try (Scanner scanner = new Scanner(System.in)) {
+        try {
             System.out.println("Welcome to the Intellectual Systems Game!");
             System.out.println("Please select the data format to load the game:");
             System.out.println("1. JSON");
             System.out.println("2. XML");
             System.out.println("3. CSV");
             System.out.print("Enter your choice (1-3): ");
-            String choice = scanner.nextLine();
+            String choice = scanner.next();
+            scanner.nextLine();
 
             String filePath;
             GameDataParser parser;

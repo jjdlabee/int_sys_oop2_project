@@ -80,9 +80,6 @@ public class XmlParser implements GameDataParser {
         } catch (ParserConfigurationException | SAXException | IOException e) {
             
         }
-        for (Category category : categories) {
-            System.out.println(category);
-        }
     }
 
 }

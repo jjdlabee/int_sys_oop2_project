@@ -15,6 +15,7 @@ import java.util.Scanner;
  */
 public class StartState implements GameState {
     private GameEngine gameEngine;
+    private static final Scanner scanner = new Scanner(System.in);
 
     public void setGameEngine(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
@@ -25,7 +26,7 @@ public class StartState implements GameState {
         // Implementation for rendering the start state
         System.out.println("Welcome to the Game! Press Start to begin.");
 
-        try (Scanner scanner = new Scanner(System.in)) {
+        if (scanner.hasNextLine()) {
             String input = scanner.nextLine();
             if ("Start".equalsIgnoreCase(input)) {
                 gameEngine.setState(new PlayerSetupState(gameEngine));
