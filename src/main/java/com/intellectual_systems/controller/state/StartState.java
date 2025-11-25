@@ -5,34 +5,40 @@
 
 package com.intellectual_systems.controller.state;
 
+import java.util.Scanner;
+
+import com.intellectual_systems.command.StartCommand;
 import com.intellectual_systems.controller.GameEngine;
 import com.intellectual_systems.controller.GameState;
-import java.util.Scanner;
 
 /**
  *
  * @author Jonathan
  */
 public class StartState implements GameState {
-    private GameEngine gameEngine;
+    private final GameEngine gameEngine;
     private static final Scanner scanner = new Scanner(System.in);
 
-    public void setGameEngine(GameEngine gameEngine) {
+    public StartState(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
     }
 
     @Override
-    public void render() {
+    public void renderCurrentState() {
         // Implementation for rendering the start state
         System.out.println("Welcome to the Game! Press Start to begin.");
 
         if (scanner.hasNextLine()) {
             String input = scanner.nextLine();
-            if ("Start".equalsIgnoreCase(input)) {
-                gameEngine.setState(new PlayerSetupState(gameEngine));
-                gameEngine.render();
-            }
+            StartCommand  startCommand = new StartCommand(gameEngine, input);
+            startCommand.execute();
         }
+    }
+
+    @Override
+    public void renderNextState() {
+        gameEngine.setState(new PlayerSetupState(gameEngine));
+        gameEngine.renderCurrentState();
     }
 
 }

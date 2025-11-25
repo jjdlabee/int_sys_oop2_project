@@ -4,6 +4,10 @@
  */
 
 package com.intellectual_systems.controller;
+import java.util.List;
+
+import com.intellectual_systems.model.Player;
+
 
 /**
  *
@@ -11,16 +15,29 @@ package com.intellectual_systems.controller;
  */
 public class GameEngine {
     GameState state;
+    private List<Player> players;
 
     public GameEngine(GameState startState) {
         this.state = startState;
     }
 
-    public void render() {
-        state.render();
+    public void renderCurrentState() {
+        state.renderCurrentState();
+    }
+
+    public void renderNextState() {
+        state.renderNextState();
     }
 
     public void setState(GameState state) {
         this.state = state;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 }

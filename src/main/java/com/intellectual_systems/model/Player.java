@@ -11,11 +11,10 @@ package com.intellectual_systems.model;
  */
 public class Player {
     private final String username;
-    private int score;
+    private int score = 0;
 
-    public Player(String username, int score) {
+    public Player(String username) {
         this.username = username;
-        this.score = score;
     }
 
     public String getUsername() {

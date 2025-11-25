@@ -10,5 +10,6 @@ package com.intellectual_systems.controller;
  * @author Jonathan
  */
 public interface GameState {
-    void render();
+    void renderNextState();
+    void renderCurrentState();
 }
