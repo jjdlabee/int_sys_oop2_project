@@ -6,13 +6,6 @@ import org.junit.Test;
 import org.junit.Before;
 import java.io.File;
 import java.util.List;
-import java.io.FileNotFoundException;
-import com.intellectual_systems.controller.GameManager;
-import com.intellectual_systems.model.Player;
-import com.intellectual_systems.model.Question;
-import com.intellectual_systems.util.FileParser;
-import com.intellectual_systems.util.ScoringEngine;
-import com.intellectual_systems.util.EventLogger;
 
 import com.intellectual_systems.controller.GameEngine;
 import com.intellectual_systems.model.Player;
@@ -20,7 +13,6 @@ import com.intellectual_systems.model.Question;
 import com.intellectual_systems.parser.CsvParser;
 import com.intellectual_systems.parser.JsonParser;
 import com.intellectual_systems.parser.XmlParser;
-
 
 /**
  * Test suite for Multi-Player Jeopardy Game application.
