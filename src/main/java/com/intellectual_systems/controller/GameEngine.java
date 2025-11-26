@@ -4,13 +4,13 @@
  */
 
 package com.intellectual_systems.controller;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.intellectual_systems.logging.GameEvent;
 import com.intellectual_systems.model.Category;
 import com.intellectual_systems.model.GameBoard;
 import com.intellectual_systems.model.Player;
+import com.intellectual_systems.model.Turn;
 
 
 /**
@@ -27,13 +27,13 @@ public class GameEngine {
 
     private GameBoard gameBoard;
     private TurnManager turnManager;
-    private final List<GameEvent> gameEvents;
+    private final GameEvent gameEvent;
 
     public GameEngine(GameState startState) {
         this.state = startState;
         gamesPlayed++;
         this.gameId = String.format("GAME%03d", gamesPlayed);
-        this.gameEvents = new ArrayList<>();
+        this.gameEvent = new GameEvent();
     }
 
     //Accessor methods
@@ -58,13 +58,13 @@ public class GameEngine {
                 return category;
             }
         }
-        return null; // or throw an exception if preferred
+        return null; 
     }
     public int getTotalTurns() {
         return categories.size() * categories.get(0).getQuestions().size(); 
     }
-    public List<GameEvent> getGameEvents() {
-        return this.gameEvents;
+    public GameEvent getGameEvent() {
+        return this.gameEvent;
     }
 
     //Mutator methods
@@ -84,8 +84,13 @@ public class GameEngine {
     public void setState(GameState state) {
         this.state = state;
     }
-    public void addGameEvent(GameEvent event) {
-        this.gameEvents.add(event);
+
+    //Logging methods
+    public void addPlayerGameEvent(String activity, Turn turn) {
+        this.gameEvent.newGameEvent(this.gameId, activity, turn);
+    }
+    public void addSystemGameEvent(String activity) {
+        this.gameEvent.newGameEvent(this.gameId, activity, null);
     }
 
     //Game state methods

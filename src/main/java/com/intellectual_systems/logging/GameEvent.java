@@ -15,19 +15,11 @@ import com.intellectual_systems.model.Turn;
  * @author Jonathan
  */
 public class GameEvent implements GameEventListener{
-    private final String caseID;
-    private final String Activity;
-    private final Turn turn;
-    private final String Timestamp;
-    private final List<GameEventListener> listeners;
-
-    public GameEvent(String caseID, String Activity, Turn turn, String Timestamp) {
-        this.caseID = caseID;
-        this.Activity = Activity;
-        this.turn = turn;
-        this.Timestamp = Timestamp;
-        this.listeners = new ArrayList<>();
-    }
+    private String caseID = "";
+    private String Activity = "";
+    private Turn turn = null;
+    private final String Timestamp = "";
+    private final List<GameEventListener> listeners = new ArrayList<>();;
 
     public String getCaseID() {
         return caseID;
@@ -40,6 +32,13 @@ public class GameEvent implements GameEventListener{
     }
     public String getTimestamp() {
         return Timestamp;
+    }
+
+    public void newGameEvent(String caseID,String activity, Turn turn) {
+        this.caseID = caseID;
+        this.Activity = activity;
+        this.turn = turn;
+        notifyEventListeners(this);
     }
 
     public void addListener(GameEventListener listener) {
@@ -56,10 +55,15 @@ public class GameEvent implements GameEventListener{
         }
     }
 
-    // @Override
-    // public String toString() {
-    //     return "Event Type: " + eventType + ", Description: " + eventDescription;
-    // }
+    @Override
+    public String toString() {
+        return "GameEvent{" +
+                "caseID='" + caseID + '\'' +
+                ", Activity='" + Activity + '\'' +
+                ", turn=" + turn +
+                ", Timestamp='" + Timestamp + '\'' +
+                '}';
+    }
 
     @Override
     public void updateOnGameEvent(GameEvent event) {

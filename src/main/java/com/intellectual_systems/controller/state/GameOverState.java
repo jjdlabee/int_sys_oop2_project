@@ -35,6 +35,7 @@ public class GameOverState implements GameState {
         String choice = scanner.next();
         scanner.nextLine();
         if (choice.equalsIgnoreCase("Y")) {
+            gameEngine.updateGameId();
             renderNextState();
         } else {
             System.out.println("Thank you for playing!");

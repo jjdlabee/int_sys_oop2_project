@@ -8,6 +8,7 @@ package com.intellectual_systems.app;
 import com.intellectual_systems.controller.GameEngine;
 import com.intellectual_systems.controller.GameState;
 import com.intellectual_systems.controller.state.StartState;
+import com.intellectual_systems.logging.EventLogger;
 
 /**
  *
@@ -26,6 +27,9 @@ public class Main {
 
         GameEngine gameEngine = new GameEngine(initialState);
         ((StartState) initialState).setGameEngine(gameEngine);
+
+        EventLogger listener = new EventLogger();
+        gameEngine.getGameEvent().addListener(listener);
         gameEngine.renderCurrentState();
     }
 }

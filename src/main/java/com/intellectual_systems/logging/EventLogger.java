@@ -5,15 +5,27 @@
 
 package com.intellectual_systems.logging;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Jonathan
  */
 public class EventLogger implements GameEventListener {
+    private List<GameEvent> eventLog = new ArrayList<>();
+
     @Override
     public void updateOnGameEvent(GameEvent event) {
         // Log the event details to console or a file
-        System.out.println("Game Event Occurred: " + event.toString());
+        eventLog.add(event);
     }
+
+    public void LogEventsToCSV() {
+        CSVLogger csvLogger = new CSVLogger("game_events_log.csv");
+        csvLogger.logGameEvents(eventLog);
+    }
+
+
 
 }

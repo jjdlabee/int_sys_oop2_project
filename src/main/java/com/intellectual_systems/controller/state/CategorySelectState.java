@@ -35,6 +35,7 @@ public class CategorySelectState implements GameState {
             System.out.print("\nEnter your choice (1-" + i + "): ");
             int choice = scanner.nextInt();
             scanner.nextLine(); 
+
             System.out.println("Category " + choice + " has been selected. \n");
             SelectCategoryCommand selectCategoryCommand = new SelectCategoryCommand(gameEngine, choice - 1);
             selectCategoryCommand.execute();

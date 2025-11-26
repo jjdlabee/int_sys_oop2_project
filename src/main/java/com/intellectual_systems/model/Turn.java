@@ -64,4 +64,17 @@ public class Turn {
     public int getCurrentQuestionValue() {
         return currentQuestionValue;
     }
+
+    @Override
+    public String toString() {
+        return "Turn{" +
+                "player=" + player.getUsername() +
+                ", turnNumber=" + turnNumber +
+                ", currentCategory='" + currentCategory + '\'' +
+                ", currentQuestion='" + currentQuestion + '\'' +
+                ", currentAnswer='" + currentAnswer + '\'' +
+                ", isCorrect=" + isCorrect +
+                ", currentQuestionValue=" + currentQuestionValue +
+                '}';
+    }   
 }

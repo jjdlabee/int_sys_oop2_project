@@ -31,6 +31,7 @@ public class StartCommand implements Command {
             gameEngine.renderCurrentState();
             return;
         }
+        gameEngine.addSystemGameEvent("Start Game");
         gameEngine.renderNextState();
     }
 }

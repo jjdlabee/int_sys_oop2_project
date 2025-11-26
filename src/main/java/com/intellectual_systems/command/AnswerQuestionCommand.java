@@ -39,6 +39,7 @@ public class AnswerQuestionCommand implements Command {
         
         gameEngine.getGameBoard().clearCell(this.categoryName, this.questionValue);
         gameEngine.getCategoryByName(this.categoryName).removeQuestion(gameEngine.getCategoryByName(this.categoryName).getQuestionByCategoryAndValue(this.categoryName, this.questionValue));
+        gameEngine.addPlayerGameEvent("Answer Question", gameEngine.getTurnManager().getCurrentTurn());
         gameEngine.renderNextState();
     }
 

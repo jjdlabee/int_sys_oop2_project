@@ -66,6 +66,7 @@ public class LoadGameDataCommand implements Command {
     public void execute() {
         parse();
         loadGameBoard();
+        gameEngine.addSystemGameEvent("Load File");
         gameEngine.renderNextState();
     }
 

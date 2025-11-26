@@ -32,6 +32,8 @@ public class SelectQuestionCommand implements Command {
         int value = gameEngine.getCategoryByName(categoryName).getQuestions().get(questionIndex).getValue();
         gameEngine.getTurnManager().getCurrentTurn().setCurrentQuestion(question);
         gameEngine.getTurnManager().getCurrentTurn().setCurrentQuestionValue(value);
+
+        gameEngine.addPlayerGameEvent("Select Question", gameEngine.getTurnManager().getCurrentTurn());
         gameEngine.renderNextState();
     }
 }
