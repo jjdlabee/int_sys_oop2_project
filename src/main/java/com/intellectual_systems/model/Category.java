@@ -30,6 +30,21 @@ public class Category {
         this.questions.add(question);
     }
 
+    public Question getQuestionByCategoryAndValue(String categoryName, int value) {
+        if (!this.name.equals(categoryName)) {
+            return null; // or throw an exception if preferred
+        }
+        Category category = this;
+        if (category != null) {
+            for (Question question : category.getQuestions()) {
+                if (question.getValue() == value) {
+                    return question;
+                }
+            }
+        }
+        return null; // or throw an exception if preferred
+    }
+
     @Override
     public String toString() {
         String s = "Category{" + "name=" + name; 

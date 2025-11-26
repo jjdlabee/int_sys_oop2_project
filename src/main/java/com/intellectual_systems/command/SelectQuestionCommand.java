@@ -29,7 +29,9 @@ public class SelectQuestionCommand implements Command {
     @Override
     public void execute() {
         String question= gameEngine.getCategoryByName(categoryName).getQuestions().get(questionIndex).getQuestionText();
+        int value = gameEngine.getCategoryByName(categoryName).getQuestions().get(questionIndex).getValue();
         gameEngine.getTurnManager().getCurrentTurn().setCurrentQuestion(question);
+        gameEngine.getTurnManager().getCurrentTurn().setCurrentQuestionValue(value);
         gameEngine.renderNextState();
     }
 }

@@ -57,12 +57,14 @@ public class GameBoard {
     }
 
     public String getCell(String category, int value) {
+        StringBuilder sb = new StringBuilder();
         Integer col = indexes.get(category);
         Integer row = indexes.get(value + "");
         if (col != null && row != null && row >= 0 && row < rows) {
-            return board[row][col];
+            sb.append("Value: ").append(value).append(", Question: ").append(board[row + 1][col]);
+            return sb.toString();
         } else {
-            throw new IndexOutOfBoundsException("Invalid category or value");
+            return "Invalid category or value";
         }
     }
 

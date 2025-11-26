@@ -29,7 +29,7 @@ public class Turn {
     public void setCurrentAnswer(String answer){
         this.currentAnswer = answer;
     }
-    public void setQuestionValue(int value){
+    public void setCurrentQuestionValue(int value){
         this.currentQuestionValue = value;
     }
 
