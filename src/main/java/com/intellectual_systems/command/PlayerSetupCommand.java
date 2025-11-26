@@ -31,7 +31,7 @@ public class PlayerSetupCommand implements Command {
             return;
         }
         gameEngine.setPlayers(this.players);
-        gameEngine.initializeTurnMangager();
+        gameEngine.initializeTurnManager();
         gameEngine.renderNextState();
     }
 }

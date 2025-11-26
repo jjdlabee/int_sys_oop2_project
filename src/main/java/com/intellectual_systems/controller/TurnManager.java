@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.intellectual_systems.model.Player;
+import com.intellectual_systems.model.Turn;
 
 /**
  *
@@ -17,10 +18,20 @@ import com.intellectual_systems.model.Player;
 public class TurnManager {
     private int currentPlayerIndex;
     private final List<Player> players;
+    private Turn currentTurn;
 
     public TurnManager(List<Player> players) {
         this.players = new ArrayList<>(players);
         this.currentPlayerIndex = 0;
+        this.currentTurn = new Turn(players.get(currentPlayerIndex));
+    }
+
+    public Turn getCurrentTurn() {
+        return currentTurn;
+    }
+
+    public void setCurrentTurn(Turn turn) {
+        this.currentTurn = turn;
     }
 
     public Player getCurrentPlayer() {

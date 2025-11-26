@@ -62,7 +62,7 @@ public class GameEngine {
         state.renderNextState();
     }
 
-    public void initializeTurnMangager(){
+    public void initializeTurnManager(){
         this.turnManager = new TurnManager(players);
     }
 

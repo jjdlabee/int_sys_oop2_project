@@ -25,6 +25,7 @@ public class CategorySelectState implements GameState {
 
     @Override
     public void renderCurrentState() {
+        gameEngine.getGameBoard().renderEntireGameBoard();
         System.out.println("Select a category for the game.");
        try {
             int i;
@@ -35,10 +36,8 @@ public class CategorySelectState implements GameState {
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
             System.out.println("Category " + choice + " has been selected.");
-            // // After selection, transition to the next state
             SelectCategoryCommand selectCategoryCommand = new SelectCategoryCommand(gameEngine, choice - 1);
             selectCategoryCommand.execute();
-            // // gameEngine.setState(new NextState(gameEngine));
         } catch(Exception e) {
             System.out.println("An error occurred: " + e.getMessage());
             gameEngine.renderCurrentState();
@@ -47,8 +46,8 @@ public class CategorySelectState implements GameState {
 
     @Override
     public void renderNextState() {
-        // Transition to the next state after category selection
-        // gameEngine.setState(new NextState(gameEngine));
+        gameEngine.setState(new QuestionSelectState(gameEngine));
+        gameEngine.renderCurrentState();
     }
 
 }

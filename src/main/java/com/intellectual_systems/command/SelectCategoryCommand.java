@@ -20,6 +20,9 @@ public class SelectCategoryCommand {
     }
 
     public void execute() {
-        gameEngine.selectCategory(categoryIndex);
+        String categoryName = gameEngine.getCategories().get(categoryIndex).getName();
+        gameEngine.getTurnManager().getCurrentTurn().setCurrentCategory(categoryName);
+        gameEngine.getGameBoard().renderCategory(categoryName);
+        //gameEngine.renderNextState();
     }
 }
