@@ -30,6 +30,10 @@ public class Category {
         this.questions.add(question);
     }
 
+    public void removeQuestion(Question question) {
+        this.questions.remove(question);
+    }
+
     public Question getQuestionByCategoryAndValue(String categoryName, int value) {
         if (!this.name.equals(categoryName)) {
             return null; // or throw an exception if preferred

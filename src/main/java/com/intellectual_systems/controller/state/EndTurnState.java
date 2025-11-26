@@ -25,9 +25,8 @@ public class EndTurnState implements GameState {
 
     @Override
     public void renderCurrentState() {
-        System.out.println("Rendering the end turn state...");
-        System.out.println("Turn ended for player: " + gameEngine.getTurnManager().getCurrentTurn().getPlayer().getUsername());
-        System.out.println("Was the answer correct? " + gameEngine.getTurnManager().getCurrentTurn().getIsCorrect());
+        System.out.println("\nTurn ended for player: " + gameEngine.getTurnManager().getCurrentTurn().getPlayer().getUsername());
+        System.out.println("Answer was: " + gameEngine.getTurnManager().getCurrentTurn().getIsCorrect());
         
         if (gameEngine.getTurnManager().getCurrentTurn().getTurnNumber() >= gameEngine.getTotalTurns()) {
             System.out.println("Maximum number of turns reached.");

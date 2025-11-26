@@ -42,8 +42,12 @@ public class Turn {
     public int getTurnNumber() {
         return this.turnNumber;
     }
-    public boolean getIsCorrect() {
-        return isCorrect;
+    public String getIsCorrect() {
+        if (isCorrect) {
+            return "Correct";
+        } else {
+            return "Incorrect";
+        }
     }
     public Player getPlayer() {
         return player;
