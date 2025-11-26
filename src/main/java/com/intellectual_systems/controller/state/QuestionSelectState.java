@@ -27,15 +27,15 @@ public class QuestionSelectState implements GameState {
     public void renderCurrentState() {
         String categoryName = gameEngine.getTurnManager().getCurrentTurn().getCurrentCategory();
         System.out.println(gameEngine.getGameBoard().renderCategory(categoryName));
-        System.out.println("Question selection state rendering...");
+        System.out.println("Select a value from the category: " + categoryName);
        try {
             int i;
             for(i = 0; i < gameEngine.getCategoryByName(categoryName).getQuestions().size(); i++){
                 System.out.println((i + 1) + ". " + gameEngine.getCategoryByName(categoryName).getQuestions().get(i).getValue());
             }
-            System.out.print("Enter your choice (1-" + i + "): ");
+            System.out.print("\nEnter your choice (1-" + i + "): ");
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine(); 
             System.out.println("Question " + choice + " has been selected.");
             SelectQuestionCommand selectQuestionCommand = new SelectQuestionCommand(gameEngine, categoryName, choice - 1);
             selectQuestionCommand.execute();

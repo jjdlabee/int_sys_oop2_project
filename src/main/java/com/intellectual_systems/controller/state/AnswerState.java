@@ -28,18 +28,21 @@ public class AnswerState implements GameState {
         String categoryName = gameEngine.getTurnManager().getCurrentTurn().getCurrentCategory();
         int value = gameEngine.getTurnManager().getCurrentTurn().getCurrentQuestionValue();
         System.out.println(gameEngine.getGameBoard().renderQuestionValue(categoryName, value));
-        System.out.println("Rendering the answer state...");
+        System.out.println("Choose your answer for the question valued at " + value + " in category " + categoryName + ": \n");
         
        try {
             char i;
             for(i = 'A'; i < 'A' + gameEngine.getCategoryByName(categoryName).getQuestionByCategoryAndValue(categoryName, value).getChoices().size(); i++){
                 System.out.println(i + ". " + gameEngine.getCategoryByName(categoryName).getQuestionByCategoryAndValue(categoryName, value).getChoices().get(i - 'A'));
             }
-            System.out.print("Enter your choice (A-" + (char)(i - 1) + "): ");
+
+            System.out.print("\nEnter your choice (A-" + (char)(i - 1) + "): ");
             char choice = scanner.next().charAt(0);
-            scanner.nextLine(); // Consume newlinesa
+            scanner.nextLine(); 
+
             System.out.println("Answer " + choice + " has been selected.");
-            AnswerQuestionCommand answerQuestionCommand = new AnswerQuestionCommand(gameEngine, categoryName, value, choice - 'A');
+
+            AnswerQuestionCommand answerQuestionCommand = new AnswerQuestionCommand(gameEngine, categoryName, value, choice);
             answerQuestionCommand.execute();
         } catch(Exception e) {
             System.out.println("An error occurred: " + e.getMessage());

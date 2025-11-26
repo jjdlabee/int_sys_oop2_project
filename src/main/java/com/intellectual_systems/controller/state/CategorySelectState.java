@@ -32,10 +32,10 @@ public class CategorySelectState implements GameState {
             for(i = 0; i < gameEngine.getCategories().size(); i++){
                 System.out.println((i + 1) + ". " + gameEngine.getCategories().get(i).getName());
             }
-            System.out.print("Enter your choice (1-" + i + "): ");
+            System.out.print("\nEnter your choice (1-" + i + "): ");
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
-            System.out.println("Category " + choice + " has been selected.");
+            scanner.nextLine(); 
+            System.out.println("Category " + choice + " has been selected. \n");
             SelectCategoryCommand selectCategoryCommand = new SelectCategoryCommand(gameEngine, choice - 1);
             selectCategoryCommand.execute();
         } catch(Exception e) {

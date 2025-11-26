@@ -29,9 +29,9 @@ public class PlayerSetupState implements GameState {
     @Override
     public void renderCurrentState() {
         List<Player> players = new ArrayList<>();
-        System.out.println("Setting up players. Please enter player details.");
+        System.out.println("\nSetting up players. Please enter player details.");
 
-        System.out.println("Enter number of players:");
+        System.out.print("Enter number of players:");
         int numPlayers = Integer.parseInt(scanner.nextLine());
 
         if (numPlayers <= 0 || numPlayers > 4) {
@@ -39,8 +39,19 @@ public class PlayerSetupState implements GameState {
             gameEngine.renderCurrentState();
         } else {
             for (int i = 1; i <= numPlayers; i++) {
-                System.out.println("Enter name for Player " + i + ":");
+                System.out.print("Enter name for Player " + i + ": ");
                 String playerName = scanner.nextLine();
+
+                for(Player p : players) {
+                    if(p.getUsername().equalsIgnoreCase(playerName)) {
+                        System.out.println("Player name already taken. Please enter a different name.");
+                        i--;
+                        break;
+                    }
+                }
+                if(players.stream().anyMatch(p -> p.getUsername().equalsIgnoreCase(playerName))) {
+                    continue;
+                }
                 Player player = new Player(playerName);
                 players.add(player);
                 System.out.println("Player " + i + " named " + playerName + " has been set up.");

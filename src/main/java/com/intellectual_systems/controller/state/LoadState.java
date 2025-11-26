@@ -27,8 +27,6 @@ public class LoadState implements GameState {
 
     @Override
     public void renderCurrentState() {
-        System.out.println("Rendering Load State");
-
         try {
             System.out.println("Welcome to the Intellectual Systems Game!");
             System.out.println("Please select the data format to load the game:");
@@ -39,7 +37,7 @@ public class LoadState implements GameState {
             String choice = scanner.next();
             scanner.nextLine();
 
-            System.out.print("Enter the file path to load the game data: ");
+            System.out.print("\nEnter the file path to load the game data: ");
             String filePath = scanner.nextLine();
 
             System.out.println("Loading game data from " + filePath + " in format " + choice);

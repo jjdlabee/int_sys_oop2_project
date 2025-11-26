@@ -99,11 +99,15 @@ public class GameBoard {
             throw new IndexOutOfBoundsException("Invalid category");
         }
         
-        sb.append("Category: ").append(category).append("\n");
+        sb.append("Category:").append(category).append("\n");
         sb.append("---------------------\n");
         for (int i = 1; i < rows; i++) {
             String cell = board[i][col] != null ? board[i][col] : " ";
-            sb.append(String.format("%-15s", cell)).append("\n");
+            int width = 15;
+            int pad = Math.max(0, width - cell.length());
+            int left = pad / 2;
+            int right = pad - left;
+            sb.append(" ".repeat(left)).append(cell).append(" ".repeat(right)).append("\n");
         }
         sb.append("---------------------\n");
         
@@ -113,6 +117,8 @@ public class GameBoard {
     public String renderEntireGameBoard() {
         StringBuilder sb = new StringBuilder();
         
+    // Header will be generated dynamically once we know the total table width
+
         // Calculate column widths based on content
         int[] colWidths = new int[cols];
         for (int j = 0; j < cols; j++) {
@@ -133,14 +139,29 @@ public class GameBoard {
         }
         String horSeparator = separator.toString();
         
-        // Add top separator
-        sb.append(horSeparator).append("\n");
+                // Build and append a dynamic header line centered on the table width
+                int totalWidth = horSeparator.length();
+                String title = " Current Game Board ";
+                int leftPad = Math.max(0, (totalWidth - title.length()) / 2);
+                int rightPad = Math.max(0, totalWidth - title.length() - leftPad);
+                sb.append("\n")
+                    .append("-".repeat(leftPad))
+                    .append(title)
+                    .append("-".repeat(rightPad))
+                    .append("\n");
+
+                // Add top separator
+                sb.append(horSeparator).append("\n");
         
         // Add rows
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 String cell = board[i][j] != null ? board[i][j] : " ";
-                sb.append(String.format("%-" + colWidths[j] + "s", cell));
+                int width = colWidths[j];
+                int pad = Math.max(0, width - cell.length());
+                int left = pad / 2;
+                int right = pad - left;
+                sb.append(" ".repeat(left)).append(cell).append(" ".repeat(right));
                 if (j < cols - 1) {
                     sb.append("|");
                 }

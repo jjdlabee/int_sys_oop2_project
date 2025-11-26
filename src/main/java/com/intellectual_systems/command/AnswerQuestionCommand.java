@@ -13,9 +13,9 @@ public class AnswerQuestionCommand implements Command {
     private final com.intellectual_systems.controller.GameEngine gameEngine;
     private final String categoryName;
     private final int questionValue;
-    private final int choiceIndex;
+    private final char choiceIndex;
 
-    public AnswerQuestionCommand(com.intellectual_systems.controller.GameEngine gameEngine, String categoryName, int questionValue, int choiceIndex) {
+    public AnswerQuestionCommand(com.intellectual_systems.controller.GameEngine gameEngine, String categoryName, int questionValue, char choiceIndex) {
         this.gameEngine = gameEngine;
         this.categoryName = categoryName;
         this.questionValue = questionValue;
@@ -25,7 +25,7 @@ public class AnswerQuestionCommand implements Command {
     @Override
     public void execute() {
         String correctAnswer = gameEngine.getCategoryByName(this.categoryName).getQuestionByCategoryAndValue(this.categoryName, this.questionValue).getAnswer();
-        String selectedAnswer = gameEngine.getCategoryByName(this.categoryName).getQuestionByCategoryAndValue(this.categoryName, this.questionValue).getChoices().get(this.choiceIndex);
+        String selectedAnswer = Character.toString(choiceIndex);
         gameEngine.getTurnManager().getCurrentTurn().setCurrentAnswer(selectedAnswer);
 
         if (selectedAnswer.equals(correctAnswer)) {

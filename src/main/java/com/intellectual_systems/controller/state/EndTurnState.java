@@ -43,17 +43,17 @@ public class EndTurnState implements GameState {
             System.out.println("Continuing to next turn...");
         } else {
             gameEngine.setState(new GameOverState(this.gameEngine));
-            renderNextState();
+            gameEngine.renderCurrentState();
             return;
         }
 
-        gameEngine.setState(new CategorySelectState(this.gameEngine));
         EndTurnCommand endTurnCommand = new EndTurnCommand(this.gameEngine);
         endTurnCommand.execute();
     }
 
     @Override
     public void renderNextState() {
+        gameEngine.setState(new CategorySelectState(this.gameEngine));
         gameEngine.renderCurrentState();
     }
 }
