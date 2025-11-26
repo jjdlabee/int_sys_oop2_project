@@ -20,6 +20,10 @@ public class StartCommand implements Command {
         this.input = input;
     }
 
+    public GameEngine getGameEngine() {
+        return gameEngine;
+    }
+
     @Override
     public void execute() {
         if (!input.equalsIgnoreCase("start")) {

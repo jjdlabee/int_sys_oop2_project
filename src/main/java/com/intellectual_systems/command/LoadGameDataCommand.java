@@ -31,6 +31,10 @@ public class LoadGameDataCommand implements Command {
         gameEngine.setGameBoard(gameBoard);
     }
 
+    public GameEngine getGameEngine() {
+        return gameEngine;
+    }
+
     public void parse(){
         GameDataParser parser;
         if (format.equalsIgnoreCase("1")) {

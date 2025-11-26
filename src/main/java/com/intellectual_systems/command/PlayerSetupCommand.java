@@ -23,6 +23,10 @@ public class PlayerSetupCommand implements Command {
         this.players = players;
     }
 
+    public GameEngine getGameEngine() {
+        return gameEngine;
+    }
+
     @Override
     public void execute() {
         if (players == null || players.isEmpty()) {
