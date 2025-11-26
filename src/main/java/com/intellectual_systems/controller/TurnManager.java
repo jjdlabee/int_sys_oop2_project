@@ -29,17 +29,21 @@ public class TurnManager {
     public Turn getCurrentTurn() {
         return currentTurn;
     }
+    public int getCurrentPlayerIndex() {
+        return currentPlayerIndex;
+    }
+    public Player getCurrentPlayer() {
+        return players.get(currentPlayerIndex);
+    }
 
     public void setCurrentTurn(Turn turn) {
         this.currentTurn = turn;
     }
 
-    public Player getCurrentPlayer() {
-        return players.get(currentPlayerIndex);
-    }
-
+    
     public void nextTurn() {
-        currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+        this.currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+        this.currentTurn = new Turn(players.get(currentPlayerIndex));
     }
 
    

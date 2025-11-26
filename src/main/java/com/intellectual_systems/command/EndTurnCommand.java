@@ -5,10 +5,22 @@
 
 package com.intellectual_systems.command;
 
+import com.intellectual_systems.controller.GameEngine;
+
 /**
  *
  * @author Jonathan
  */
-public class EndTurnCommand {
+public class EndTurnCommand implements Command {
+    private final GameEngine gameEngine;
 
+    public EndTurnCommand(GameEngine gameEngine) {
+        this.gameEngine = gameEngine;
+    }
+
+    @Override
+    public void execute() {
+        gameEngine.getTurnManager().nextTurn();
+        gameEngine.renderCurrentState();
+    }
 }

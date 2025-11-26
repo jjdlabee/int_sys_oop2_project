@@ -47,6 +47,9 @@ public class GameEngine {
         }
         return null; // or throw an exception if preferred
     }
+    public int getTotalTurns() {
+        return categories.size() * categories.get(0).getQuestions().size(); 
+    }
 
     //Mutator methods
     public void setPlayers(List<Player> players) {

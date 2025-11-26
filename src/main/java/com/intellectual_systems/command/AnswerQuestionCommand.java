@@ -24,9 +24,21 @@ public class AnswerQuestionCommand implements Command {
 
     @Override
     public void execute() {
-        // Logic to process the answer
-        System.out.println("Processing answer for category: " + categoryName + ", value: " + questionValue + ", choice index: " + choiceIndex);
-        // Here you would typically check if the answer is correct and update the game state accordingly
+        String correctAnswer = gameEngine.getCategoryByName(this.categoryName).getQuestionByCategoryAndValue(this.categoryName, this.questionValue).getAnswer();
+        String selectedAnswer = gameEngine.getCategoryByName(this.categoryName).getQuestionByCategoryAndValue(this.categoryName, this.questionValue).getChoices().get(this.choiceIndex);
+        gameEngine.getTurnManager().getCurrentTurn().setCurrentAnswer(selectedAnswer);
+
+        if (selectedAnswer.equals(correctAnswer)) {
+            int currentScore = gameEngine.getTurnManager().getCurrentTurn().getPlayer().getScore();
+            gameEngine.getTurnManager().getCurrentTurn().getPlayer().setScore(currentScore + this.questionValue);
+            gameEngine.getTurnManager().getCurrentTurn().setIsCorrect(true);
+        } else {
+            System.out.println("Incorrect answer. The correct answer was: " + correctAnswer);
+            gameEngine.getTurnManager().getCurrentTurn().setIsCorrect(false);
+        }
+        
+        gameEngine.getGameBoard().clearCell(this.categoryName, this.questionValue);
+        gameEngine.renderNextState();
     }
 
 }

@@ -27,19 +27,19 @@ public class AnswerState implements GameState {
     public void renderCurrentState() {
         String categoryName = gameEngine.getTurnManager().getCurrentTurn().getCurrentCategory();
         int value = gameEngine.getTurnManager().getCurrentTurn().getCurrentQuestionValue();
-        System.out.println(gameEngine.getGameBoard().getCell(categoryName, value));
+        System.out.println(gameEngine.getGameBoard().renderQuestionValue(categoryName, value));
         System.out.println("Rendering the answer state...");
         
        try {
-            int i;
-            for(i = 0; i < gameEngine.getCategoryByName(categoryName).getQuestionByCategoryAndValue(categoryName, value).getChoices().size(); i++){
-                System.out.println((i + 1) + ". " + gameEngine.getCategoryByName(categoryName).getQuestionByCategoryAndValue(categoryName, value).getChoices().get(i));
+            char i;
+            for(i = 'A'; i < 'A' + gameEngine.getCategoryByName(categoryName).getQuestionByCategoryAndValue(categoryName, value).getChoices().size(); i++){
+                System.out.println(i + ". " + gameEngine.getCategoryByName(categoryName).getQuestionByCategoryAndValue(categoryName, value).getChoices().get(i - 'A'));
             }
-            System.out.print("Enter your choice (1-" + i + "): ");
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            System.out.print("Enter your choice (A-" + (char)(i - 1) + "): ");
+            char choice = scanner.next().charAt(0);
+            scanner.nextLine(); // Consume newlinesa
             System.out.println("Answer " + choice + " has been selected.");
-            AnswerQuestionCommand answerQuestionCommand = new AnswerQuestionCommand(gameEngine, categoryName, value, choice - 1);
+            AnswerQuestionCommand answerQuestionCommand = new AnswerQuestionCommand(gameEngine, categoryName, value, choice - 'A');
             answerQuestionCommand.execute();
         } catch(Exception e) {
             System.out.println("An error occurred: " + e.getMessage());
@@ -49,6 +49,7 @@ public class AnswerState implements GameState {
 
     @Override
     public void renderNextState() {
-        gameEngine.setState(new AnswerState(gameEngine));
+        gameEngine.setState(new EndTurnState(gameEngine));
+        gameEngine.renderCurrentState();
     }
 }

@@ -48,6 +48,6 @@ public class QuestionSelectState implements GameState {
     @Override
     public void renderNextState() {
         gameEngine.setState(new AnswerState(gameEngine));
-        // gameEngine.renderCurrentState();
+        gameEngine.renderCurrentState();
     }
 } 

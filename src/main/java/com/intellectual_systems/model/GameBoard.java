@@ -15,6 +15,7 @@ import java.util.List;
 public class GameBoard {
     private final String[][] board;
     private final HashMap<String, Integer> indexes;
+    private final HashMap<Integer, String> questions;
     private final int rows;
     private final int cols;
 
@@ -23,11 +24,13 @@ public class GameBoard {
         this.cols = categories.size();
         board = new String[rows][cols];
         indexes = new HashMap<>();
+        questions = new HashMap<>();
         for (int i = 0; i < categories.size(); i++) {
             indexes.put(categories.get(i).getName(), i);
         }
         for (int i = 0; i < categories.get(0).getQuestions().size(); i++) {
             indexes.put(categories.get(0).getQuestions().get(i).getValue() + "", i);
+            questions.put(categories.get(0).getQuestions().get(i).getValue(), categories.get(0).getQuestions().get(i).getQuestionText() + "");
         }
     }
 
@@ -56,12 +59,13 @@ public class GameBoard {
         }
     }
 
-    public String getCell(String category, int value) {
+    public String renderQuestionValue(String category, int value) {
         StringBuilder sb = new StringBuilder();
         Integer col = indexes.get(category);
         Integer row = indexes.get(value + "");
+        String questionText = questions.get(value);
         if (col != null && row != null && row >= 0 && row < rows) {
-            sb.append("Value: ").append(value).append(", Question: ").append(board[row + 1][col]);
+            sb.append("Value: ").append(value).append(", Question: ").append(questionText).append("\n");
             return sb.toString();
         } else {
             return "Invalid category or value";

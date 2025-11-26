@@ -11,9 +11,11 @@ package com.intellectual_systems.model;
  */
 public class Turn {
     private final Player player;
+    private int turnNumber = 0;
     private String currentCategory;
     private String currentQuestion;
     private String currentAnswer;
+    private boolean isCorrect;
     private int currentQuestionValue;
 
     public Turn(Player player) {
@@ -32,7 +34,17 @@ public class Turn {
     public void setCurrentQuestionValue(int value){
         this.currentQuestionValue = value;
     }
+    public void setIsCorrect(boolean isCorrect) {
+        this.isCorrect = isCorrect;
+        turnNumber++;
+    }
 
+    public int getTurnNumber() {
+        return this.turnNumber;
+    }
+    public boolean getIsCorrect() {
+        return isCorrect;
+    }
     public Player getPlayer() {
         return player;
     }
