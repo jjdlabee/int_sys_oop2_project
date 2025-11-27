@@ -42,10 +42,11 @@ public class CSVLogger {
                     writer.append(event.getTurn().getCurrentCategory()).append(",");
                     writer.append(Integer.toString(event.getTurn().getCurrentQuestionValue())).append(",");
                     writer.append(event.getTurn().getCurrentAnswer() != null ? event.getTurn().getCurrentAnswer() : "N/A").append(",");
-                    writer.append(Boolean.parseBoolean(event.getTurn().getIsCorrect()) ? "Correct" : "Incorrect");
+                    writer.append(Boolean.parseBoolean(event.getTurn().getIsCorrect()) ? "Correct" : "Incorrect").append(",");
+                    writer.append(Integer.toString(event.getTurn().getPlayer().getScore())).append(",");
                 } else {
                     // write placeholders for the expected columns
-                    writer.append("N/A,N/A,N/A,N/A");
+                    writer.append("N/A,N/A,N/A,N/A,N/A");
                 }
                 writer.append("\n");
             }

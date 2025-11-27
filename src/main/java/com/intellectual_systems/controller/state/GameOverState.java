@@ -7,6 +7,8 @@ package com.intellectual_systems.controller.state;
 
 import java.util.Scanner;
 
+import com.intellectual_systems.command.GameOverCommand;
+import com.intellectual_systems.command.GameReportCommand;
 import com.intellectual_systems.controller.GameEngine;
 import com.intellectual_systems.controller.GameState;
 
@@ -39,9 +41,20 @@ public class GameOverState implements GameState {
             renderNextState();
         } 
         
-        System.out.println("Printing game log to CSV...");
-        gameEngine.getEventLogger().LogEventsToCSV();
-        System.out.println("Thank you for playing!");
+        System.out.println("How would you like Game Report? (TXT/PDF/DOCX)");
+        choice = scanner.next();
+        scanner.nextLine();
+
+        System.out.println("Generating game report in " + choice + " format...");
+        GameReportCommand gameReportCommand = new GameReportCommand(gameEngine, choice);
+        gameReportCommand.execute();
+
+        System.out.println("\nPrinting game log to CSV...");
+        
+        GameOverCommand gameOverCommand = new GameOverCommand(gameEngine);
+        gameOverCommand.execute();
+
+        System.out.println("\nThank you for playing!");
         
     }
 

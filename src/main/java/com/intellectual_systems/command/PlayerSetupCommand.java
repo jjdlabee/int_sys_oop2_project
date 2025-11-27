@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.intellectual_systems.controller.GameEngine;
 import com.intellectual_systems.model.Player;
+import com.intellectual_systems.model.Turn;
 
 /**
  *
@@ -34,9 +35,17 @@ public class PlayerSetupCommand implements Command {
             gameEngine.renderCurrentState();
             return;
         }
+        Turn SelectPlayerTurn = new Turn(players.get(0));
+        SelectPlayerTurn.setCurrentAnswer(String.valueOf(players.size()));
+        gameEngine.addPlayerGameEvent("Select Player Count", SelectPlayerTurn);
         gameEngine.setPlayers(this.players);
         gameEngine.initializeTurnManager();
-        gameEngine.addPlayerGameEvent("Player Setup", gameEngine.getTurnManager().getCurrentTurn());
+        for (Player player : players) {
+            Turn EnterPlayerNameTurn = new Turn(player);
+            EnterPlayerNameTurn.setCurrentAnswer(player.getUsername());
+            gameEngine.addPlayerGameEvent("Enter Player Name", EnterPlayerNameTurn);
+        }
+        
         gameEngine.renderNextState();
     }
 }
