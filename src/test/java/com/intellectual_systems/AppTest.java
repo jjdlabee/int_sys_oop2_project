@@ -1,16 +1,16 @@
 package com.intellectual_systems;
 
-import static org.junit.Assert.*;
-
-import org.junit.Test;
-import org.junit.Before;
-//import java.io.File;
 import java.util.ArrayList;
-//import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import org.junit.Before;
+import org.junit.Test;
+
+import com.intellectual_systems.model.Category;
 import com.intellectual_systems.model.Player;
 import com.intellectual_systems.model.Question;
-import com.intellectual_systems.model.Category;
 import com.intellectual_systems.parser.CsvParser;
 import com.intellectual_systems.parser.JsonParser;
 import com.intellectual_systems.parser.XmlParser;
@@ -40,7 +40,7 @@ public class AppTest
         ArrayList<Category> categories = csvParser.parse(testFile);
         
         assertNotNull("Categories should not be null", categories);
-        assertTrue("Should load at least one category", categories.size() > 0);
+        assertTrue("Should load at least one category", !categories.isEmpty());
     }
     
     @Test
@@ -48,9 +48,9 @@ public class AppTest
         String testFile = "src/test/java/com/intellectual_systems/resources/questions.csv";
         ArrayList<Category> categories = csvParser.parse(testFile);
         
-        assertTrue("Should have categories", categories.size() > 0);
+        assertTrue("Should have categories", !categories.isEmpty());
         Category firstCategory = categories.get(0);
-        assertTrue("Category should have questions", firstCategory.getQuestions().size() > 0);
+        assertTrue("Category should have questions", !firstCategory.getQuestions().isEmpty());
         
         Question firstQuestion = firstCategory.getQuestions().get(0);
         assertNotNull("Question should have text", firstQuestion.getQuestionText());
@@ -64,7 +64,7 @@ public class AppTest
         ArrayList<Category> categories = jsonParser.parse(testFile);
         
         assertNotNull("Categories should not be null", categories);
-        assertTrue("Should load at least one category", categories.size() > 0);
+        assertTrue("Should load at least one category", !categories.isEmpty());
     }
     
     @Test
@@ -72,9 +72,9 @@ public class AppTest
         String testFile = "src/test/java/com/intellectual_systems/resources/questions.json";
         ArrayList<Category> categories = jsonParser.parse(testFile);
         
-        assertTrue("Should have categories", categories.size() > 0);
+        assertTrue("Should have categories", !categories.isEmpty());
         Category category = categories.get(0);
-        assertTrue("Category should have questions", category.getQuestions().size() > 0);
+        assertTrue("Category should have questions", !category.getQuestions().isEmpty());
     }
     
     @Test
@@ -83,7 +83,7 @@ public class AppTest
         ArrayList<Category> categories = xmlParser.parse(testFilePath);
         
         assertNotNull("Categories should not be null", categories);
-        assertTrue("Should load at least one category", categories.size() > 0);
+        assertTrue("Should load at least one category", !categories.isEmpty());
     }
     
     @Test
@@ -91,9 +91,9 @@ public class AppTest
         String testFilePath = "src/test/java/com/intellectual_systems/resources/questions.xml";
         ArrayList<Category> categories = xmlParser.parse(testFilePath);
         
-        assertTrue("Should have categories", categories.size() > 0);
+        assertTrue("Should have categories", !categories.isEmpty());
         Category category = categories.get(0);
-        assertTrue("Category should have questions", category.getQuestions().size() > 0);
+        assertTrue("Category should have questions", !category.getQuestions().isEmpty());
     }
 
     // ==================== PLAYER TESTS (3 tests) ====================
