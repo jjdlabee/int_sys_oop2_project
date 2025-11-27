@@ -10,5 +10,5 @@ package com.intellectual_systems.reporting;
  * @author Jonathan
  */
 public interface ReportGenerator {
-
+    void generateReport(String filePath, String content);
 }

@@ -9,6 +9,10 @@ package com.intellectual_systems.reporting;
  *
  * @author Jonathan
  */
-public class TxtReportGenerator {
+public class TxtReportGenerator implements ReportGenerator {
 
+    @Override
+    public void generateReport(String filePath, String content) {
+        // Implementation for generating TXT report
+    }
 }

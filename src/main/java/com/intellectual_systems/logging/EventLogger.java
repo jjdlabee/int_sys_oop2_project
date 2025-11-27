@@ -17,9 +17,6 @@ public class EventLogger implements GameEventListener {
 
     @Override
     public void updateOnGameEvent(GameEvent event) {
-        if(event.getActivity().equals("Select Player Count")){
-
-        }
         eventLog.add(event);
     }
 
