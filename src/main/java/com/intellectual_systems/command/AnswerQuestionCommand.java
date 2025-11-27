@@ -25,13 +25,15 @@ public class AnswerQuestionCommand implements Command {
     @Override
     public void execute() {
         String correctAnswer = gameEngine.getCategoryByName(this.categoryName).getQuestionByCategoryAndValue(this.categoryName, this.questionValue).getAnswer();
-        String selectedAnswer = Character.toString(choiceIndex);
+        String selectedAnswer = gameEngine.getCategoryByName(this.categoryName).getQuestionByCategoryAndValue(this.categoryName, this.questionValue).getChoices().get(this.choiceIndex - 'A');
         gameEngine.getTurnManager().getCurrentTurn().setCurrentAnswer(selectedAnswer);
 
+        selectedAnswer = Character.toString(choiceIndex);
         if (selectedAnswer.equals(correctAnswer)) {
             int currentScore = gameEngine.getTurnManager().getCurrentTurn().getPlayer().getScore();
             gameEngine.getTurnManager().getCurrentTurn().getPlayer().setScore(currentScore + this.questionValue);
             gameEngine.getTurnManager().getCurrentTurn().setIsCorrect(true);
+            gameEngine.getTurnManager().getCurrentTurn().setScoreAfterTurn(gameEngine.getTurnManager().getCurrentTurn().getPlayer().getScore());
         } else {
             System.out.println("Incorrect answer. The correct answer was: " + correctAnswer);
             gameEngine.getTurnManager().getCurrentTurn().setIsCorrect(false);

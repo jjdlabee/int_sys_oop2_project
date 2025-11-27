@@ -40,6 +40,10 @@ public class AnswerState implements GameState {
             char choice = scanner.next().charAt(0);
             scanner.nextLine(); 
 
+            if (choice < 'A' || choice >= i) {
+                throw new IllegalArgumentException("Invalid choice. Please select a valid option.");
+            }
+
             System.out.println("Answer " + choice + " has been selected.");
 
             AnswerQuestionCommand answerQuestionCommand = new AnswerQuestionCommand(gameEngine, categoryName, value, choice);

@@ -17,6 +17,7 @@ public class Turn {
     private String currentAnswer;
     private boolean isCorrect;
     private int currentQuestionValue;
+    private int scoreAfterTurn;
 
     public Turn(Player player) {
         this.player = player;
@@ -37,6 +38,9 @@ public class Turn {
     public void setIsCorrect(boolean isCorrect) {
         this.isCorrect = isCorrect;
         turnNumber++;
+    }
+    public void setScoreAfterTurn(int score) {
+        this.scoreAfterTurn = score;
     }
 
     public int getTurnNumber() {
@@ -63,6 +67,9 @@ public class Turn {
     }
     public int getCurrentQuestionValue() {
         return currentQuestionValue;
+    }
+    public int getScoreAfterTurn() {
+        return scoreAfterTurn;
     }
 
     @Override

@@ -26,7 +26,7 @@ public class CSVLogger {
         boolean fileExistsAndNotEmpty = file.exists() && file.length() > 0;
 
         // Open FileWriter in append mode so existing logs are not overwritten
-        try (FileWriter writer = new FileWriter(this.filePath, true)) {
+        try (FileWriter writer = new FileWriter(this.filePath)) {
             // Write CSV header only if file is new/empty
             if (!fileExistsAndNotEmpty) {
                 writer.append("Case_ID,Player_ID,Activity,Timestamp,Category,Question_Value,Answer_Given,Result\n");
@@ -35,15 +35,23 @@ public class CSVLogger {
             // Write each event (append)
             for (GameEvent event : events) {
                 writer.append(event.getCaseID()).append(",");
-                writer.append(event.getTurn() != null ? event.getTurn().getPlayer().getUsername() : "System").append(",");
+                if (event.getTurn() != null && event.getTurn().getPlayer() != null) {
+                    writer.append(event.getTurn().getPlayer().getUsername()).append(",");
+                } else {
+                    writer.append("System,");
+                }
                 writer.append(event.getActivity()).append(",");
                 writer.append(event.getTimestamp()).append(",");
                 if (event.getTurn() != null) {
                     writer.append(event.getTurn().getCurrentCategory()).append(",");
                     writer.append(Integer.toString(event.getTurn().getCurrentQuestionValue())).append(",");
                     writer.append(event.getTurn().getCurrentAnswer() != null ? event.getTurn().getCurrentAnswer() : "N/A").append(",");
-                    writer.append(Boolean.parseBoolean(event.getTurn().getIsCorrect()) ? "Correct" : "Incorrect").append(",");
-                    writer.append(Integer.toString(event.getTurn().getPlayer().getScore())).append(",");
+                    if(event.getTurn().getIsCorrect() != null && event.getTurn().getIsCorrect().equals("Correct")){
+                        writer.append("Correct").append(",");
+                    } else {
+                        writer.append("N/A").append(",");
+                    }
+                    writer.append(Integer.toString(event.getTurn().getScoreAfterTurn())).append(",");
                 } else {
                     // write placeholders for the expected columns
                     writer.append("N/A,N/A,N/A,N/A,N/A");

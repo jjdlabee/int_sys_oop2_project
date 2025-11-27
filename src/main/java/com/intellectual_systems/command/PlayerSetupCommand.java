@@ -35,7 +35,7 @@ public class PlayerSetupCommand implements Command {
             gameEngine.renderCurrentState();
             return;
         }
-        Turn SelectPlayerTurn = new Turn(players.get(0));
+        Turn SelectPlayerTurn = new Turn(null);
         SelectPlayerTurn.setCurrentAnswer(String.valueOf(players.size()));
         gameEngine.addPlayerGameEvent("Select Player Count", SelectPlayerTurn);
         gameEngine.setPlayers(this.players);

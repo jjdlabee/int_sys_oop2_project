@@ -1,83 +1,19 @@
-Case_ID,Player_ID,Activity,Timestamp,Category,Question_Value,Answer_Given,Result
-GAME001,jan,Answer Question,,Arrays,200,B,Incorrect
-
-GAME001,jan,Answer Question,,Arrays,200,B,Incorrect
-
-GAME001,jan,Answer Question,,Arrays,200,B,Incorrect
-
-GAME001,jan,Answer Question,,Arrays,200,B,Incorrect
-
-GAME001,jan,Answer Question,,Arrays,200,B,Incorrect
-
-GAME001,jan,Answer Question,,Arrays,200,B,Incorrect
-
-GAME001,jan,Answer Question,,Arrays,200,B,Incorrect
-
-GAME001,jan,Answer Question,,Arrays,200,B,Incorrect
-
-GAME001,jan,Answer Question,,Arrays,200,B,Incorrect
-
-GAME001,jan,Answer Question,,Arrays,200,B,Incorrect
-
-GAME001,jan,Answer Question,,Arrays,200,B,Incorrect
-
-GAME001,jan,Answer Question,,Arrays,200,B,Incorrect
-
-GAME001,freak,Answer Question,,Control Structures,400,D,Incorrect
-GAME001,freak,Answer Question,,Control Structures,400,D,Incorrect
-GAME001,freak,Answer Question,,Control Structures,400,D,Incorrect
-GAME001,freak,Answer Question,,Control Structures,400,D,Incorrect
-GAME001,freak,Answer Question,,Control Structures,400,D,Incorrect
-GAME001,freak,Answer Question,,Control Structures,400,D,Incorrect
-GAME001,freak,Answer Question,,Control Structures,400,D,Incorrect
-GAME001,freak,Answer Question,,Control Structures,400,D,Incorrect
-GAME001,freak,Answer Question,,Control Structures,400,D,Incorrect
-GAME001,freak,Answer Question,,Control Structures,400,D,Incorrect
-GAME001,freak,Answer Question,,Control Structures,400,D,Incorrect
-GAME001,freak,Answer Question,,Control Structures,400,D,Incorrect
-GAME001,freak,Answer Question,,Control Structures,400,D,Incorrect
-GAME001,freak,Answer Question,,Control Structures,400,D,Incorrect
-GAME001,freak,Answer Question,,Control Structures,400,D,Incorrect
-GAME001,N/A,Start Game,,N/A,N/A,N/A,N/A
-GAME001,N/A,Load File,,N/A,N/A,N/A,N/A
-GAME001,jald,Player Setup,,Functions,200,D,Incorrect
-GAME001,N/A,Select Category,,N/A,N/A,N/A,N/A
-GAME001,jald,Select Question,,Functions,200,D,Incorrect
-GAME001,jald,Answer Question,,Functions,200,D,Incorrect
-GAME001,N/A,Select Category,,N/A,N/A,N/A,N/A
-GAME001,jae,Select Question,,Control Structures,400,B,Incorrect
-GAME001,jae,Answer Question,,Control Structures,400,B,Incorrect
-GAME001,N/A,Select Category,,N/A,N/A,N/A,N/A
-GAME001,jald,Select Question,,Control Structures,300,C,Incorrect
-GAME001,jald,Answer Question,,Control Structures,300,C,Incorrect
-GAME001,N/A,Select Category,,N/A,N/A,N/A,N/A
-GAME001,jae,Select Question,,Functions,500,B,Incorrect
-GAME001,jae,Answer Question,,Functions,500,B,Incorrect
-GAME001,System,Start Game,,N/A,N/A,N/A,N/A
-GAME001,System,Load File,,N/A,N/A,N/A,N/A
-GAME001,john,Select Player Count,,null,0,N/A,Incorrect
-GAME001,john,Enter Player Name,,null,0,N/A,Incorrect
-GAME001,pam,Enter Player Name,,null,0,N/A,Incorrect
-GAME001,john,Select Category,,Variables & Data Types,300,2,Incorrect
-GAME001,john,Select Question,,Variables & Data Types,300,2,Incorrect
-GAME001,john,Answer Question,,Variables & Data Types,300,2,Incorrect
-GAME001,pam,Select Category,,Arrays,200,D,Incorrect
-GAME001,pam,Select Question,,Arrays,200,D,Incorrect
-GAME001,pam,Answer Question,,Arrays,200,D,Incorrect
-GAME001,System,Generate Event Log,,N/A,N/A,N/A,N/A
 GAME001,System,Start Game,,N/A,N/A,N/A,N/A,N/A
 GAME001,System,Load File,,N/A,N/A,N/A,N/A,N/A
-GAME001,john,Select Player Count,,null,0,2,Incorrect,0,
-GAME001,john,Enter Player Name,,null,0,john,Incorrect,0,
-GAME001,jeff,Enter Player Name,,null,0,jeff,Incorrect,0,
-GAME001,john,Select Category,,Control Structures,300,D,Incorrect,0,
-GAME001,john,Select Question,,Control Structures,300,D,Incorrect,0,
-GAME001,john,Answer Question,,Control Structures,300,D,Incorrect,0,
-GAME001,jeff,Select Category,,Control Structures,400,A,Incorrect,0,
-GAME001,jeff,Select Question,,Control Structures,400,A,Incorrect,0,
-GAME001,jeff,Answer Question,,Control Structures,400,A,Incorrect,0,
-GAME001,john,Select Category,,Functions,200,C,Incorrect,0,
-GAME001,john,Select Question,,Functions,200,C,Incorrect,0,
-GAME001,john,Answer Question,,Functions,200,C,Incorrect,0,
+GAME001,System,Select Player Count,,null,0,2,Incorrect,0,
+GAME001,jalfd,Enter Player Name,,null,0,jalfd,Incorrect,0,
+GAME001,ema,Enter Player Name,,null,0,ema,Incorrect,0,
+GAME001,jalfd,Select Category,,Control Structures,300,if,Incorrect,0,
+GAME001,jalfd,Select Question,,Control Structures,300,if,Incorrect,0,
+GAME001,jalfd,Answer Question,,Control Structures,300,if,Incorrect,0,
+GAME001,ema,Select Category,,Variables & Data Types,300,2,Correct,300,
+GAME001,ema,Select Question,,Variables & Data Types,300,2,Correct,300,
+GAME001,ema,Answer Question,,Variables & Data Types,300,2,Correct,300,
+GAME001,jalfd,Select Category,,Arrays,300,do-while,Incorrect,0,
+GAME001,jalfd,Select Question,,Arrays,300,do-while,Incorrect,0,
+GAME001,jalfd,Answer Question,,Arrays,300,do-while,Incorrect,0,
+GAME001,System,Generate Report,,N/A,N/A,N/A,N/A,N/A
+GAME001,System,Generate Event Log,,N/A,N/A,N/A,N/A,N/A
+GAME001,System,Exit Game,,N/A,N/A,N/A,N/A,N/A
 GAME001,System,Generate Report,,N/A,N/A,N/A,N/A,N/A
 GAME001,System,Generate Event Log,,N/A,N/A,N/A,N/A,N/A
