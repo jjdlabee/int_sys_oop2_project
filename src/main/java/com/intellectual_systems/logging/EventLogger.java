@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author Jonathan
+ * @author Vinayak
  */
 public class EventLogger implements GameEventListener {
     private final List<GameEvent> eventLog = new ArrayList<>();
