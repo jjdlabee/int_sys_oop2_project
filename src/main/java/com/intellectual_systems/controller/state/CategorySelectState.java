@@ -36,7 +36,7 @@ public class CategorySelectState implements GameState {
             int choice = scanner.nextInt();
             scanner.nextLine(); 
             
-            if (!Character.isDigit(choice) || choice < 1 || choice > i) {
+            if (!Character.isDigit(Integer.toString(choice).charAt(0)) || choice < 1 || choice > i) {
                 throw new IllegalArgumentException("Invalid choice. Please select a valid category number.");
             }
             System.out.println("Category " + choice + " has been selected. \n");

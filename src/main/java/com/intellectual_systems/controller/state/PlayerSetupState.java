@@ -30,36 +30,41 @@ public class PlayerSetupState implements GameState {
     public void renderCurrentState() {
         List<Player> players = new ArrayList<>();
         System.out.println("\nSetting up players. Please enter player details.");
+        try {
+            System.out.print("Enter number of players: ");
+            int numPlayers = Integer.parseInt(scanner.nextLine());
 
-        System.out.print("Enter number of players: ");
-        int numPlayers = Integer.parseInt(scanner.nextLine());
+            if (!Character.isDigit(Integer.toString(numPlayers).charAt(0)) || numPlayers <= 0 || numPlayers > 4) {
+                System.out.println("Invalid number of players. Please try again.");
+                gameEngine.renderCurrentState();
+            } else {
+                for (int i = 1; i <= numPlayers; i++) {
+                    System.out.print("Enter name for Player " + i + ": ");
+                    String playerName = scanner.nextLine();
 
-        if (!Character.isDigit(numPlayers) || numPlayers <= 0 || numPlayers > 4) {
-            System.out.println("Invalid number of players. Please try again.");
-            gameEngine.renderCurrentState();
-        } else {
-            for (int i = 1; i <= numPlayers; i++) {
-                System.out.print("Enter name for Player " + i + ": ");
-                String playerName = scanner.nextLine();
-
-                for(Player p : players) {
-                    if(p.getUsername().equalsIgnoreCase(playerName)) {
-                        System.out.println("Player name already taken. Please enter a different name.");
-                        i--;
-                        break;
+                    for(Player p : players) {
+                        if(p.getUsername().equalsIgnoreCase(playerName)) {
+                            System.out.println("Player name already taken. Please enter a different name.");
+                            i--;
+                            break;
+                        }
                     }
+                    if(players.stream().anyMatch(p -> p.getUsername().equalsIgnoreCase(playerName))) {
+                        continue;
+                    }
+                    Player player = new Player(playerName);
+                    players.add(player);
+                    System.out.println("Player " + i + " named " + playerName + " has been set up.");
                 }
-                if(players.stream().anyMatch(p -> p.getUsername().equalsIgnoreCase(playerName))) {
-                    continue;
-                }
-                Player player = new Player(playerName);
-                players.add(player);
-                System.out.println("Player " + i + " named " + playerName + " has been set up.");
-            }
 
-            PlayerSetupCommand playerSetupCommand = new PlayerSetupCommand(this.gameEngine, players);
-            playerSetupCommand.execute();
+                PlayerSetupCommand playerSetupCommand = new PlayerSetupCommand(this.gameEngine, players);
+                playerSetupCommand.execute();
+            }
+        } catch ( RuntimeException e) {
+            System.out.println("An error occurred: " + e.getMessage());
+            gameEngine.renderCurrentState();
         }
+        
     }
 
     @Override
