@@ -7,7 +7,7 @@ package com.intellectual_systems.logging;
 
 /**
  *
- * @author Jonathan
+ * @author Vinayak
  */
 public interface GameEventListener {
     void updateOnGameEvent(GameEvent event);
