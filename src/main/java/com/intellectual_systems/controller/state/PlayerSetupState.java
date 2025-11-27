@@ -31,7 +31,7 @@ public class PlayerSetupState implements GameState {
         List<Player> players = new ArrayList<>();
         System.out.println("\nSetting up players. Please enter player details.");
 
-        System.out.print("Enter number of players:");
+        System.out.print("Enter number of players: ");
         int numPlayers = Integer.parseInt(scanner.nextLine());
 
         if (numPlayers <= 0 || numPlayers > 4) {

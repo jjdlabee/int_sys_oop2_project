@@ -25,9 +25,9 @@ public class GameOverState implements GameState {
 
     @Override
     public void renderCurrentState() {
-        System.out.println("Game Over!");
+        System.out.println("\nGame Over!");
         
-        System.out.println("Restart the game? Y/N");
+        System.out.println("\nRestart the game? Y/N");
         String choice = scanner.next();
         scanner.nextLine();
         if (choice.equalsIgnoreCase("Y")) {
@@ -39,7 +39,7 @@ public class GameOverState implements GameState {
             renderCurrentState();
         }
 
-        System.out.println("Printing game log to CSV...");
+        System.out.println("\nPrinting game log to CSV...");
         
         GameOverCommand gameOverCommand = new GameOverCommand(gameEngine);
         gameOverCommand.execute();

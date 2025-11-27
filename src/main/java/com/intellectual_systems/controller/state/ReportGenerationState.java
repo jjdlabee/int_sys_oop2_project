@@ -25,16 +25,16 @@ public class ReportGenerationState implements GameState {
 
     @Override
     public void renderCurrentState() {
-        System.out.println("Final Scores:");
+        System.out.println("\nFinal Scores:");
         gameEngine.getPlayers().forEach(player -> {
             System.out.println(player.getUsername() + ": " + player.getScore() + " points");
         });
         
-        System.out.println("How would you like Game Report? (TXT/PDF/DOCX)");
+        System.out.println("\nHow would you like Game Report? (TXT/PDF/DOCX)");
         String choice = scanner.next();
         scanner.nextLine();
 
-        System.out.println("Generating game report in " + choice + " format...");
+        System.out.println("\nGenerating game report in " + choice + " format...");
         GameReportCommand gameReportCommand = new GameReportCommand(gameEngine, choice);
         gameReportCommand.execute();
     }
