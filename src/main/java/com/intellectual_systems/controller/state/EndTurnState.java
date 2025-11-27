@@ -41,7 +41,7 @@ public class EndTurnState implements GameState {
         if (choice.equalsIgnoreCase("Y")){
             System.out.println("Continuing to next turn...");
         } else {
-            gameEngine.setState(new GameOverState(this.gameEngine));
+            gameEngine.setState(new ReportGenerationState(this.gameEngine));
             gameEngine.renderCurrentState();
             return;
         }

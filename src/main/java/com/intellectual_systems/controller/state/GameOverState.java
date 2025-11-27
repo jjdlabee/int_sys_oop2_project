@@ -8,7 +8,6 @@ package com.intellectual_systems.controller.state;
 import java.util.Scanner;
 
 import com.intellectual_systems.command.GameOverCommand;
-import com.intellectual_systems.command.GameReportCommand;
 import com.intellectual_systems.controller.GameEngine;
 import com.intellectual_systems.controller.GameState;
 
@@ -17,7 +16,7 @@ import com.intellectual_systems.controller.GameState;
  * @author Jonathan
  */
 public class GameOverState implements GameState {
-    private static final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
     private final GameEngine gameEngine;
 
     public GameOverState(GameEngine gameEngine) {
@@ -28,11 +27,6 @@ public class GameOverState implements GameState {
     public void renderCurrentState() {
         System.out.println("Game Over!");
         
-        System.out.println("Final Scores:");
-        gameEngine.getPlayers().forEach(player -> {
-            System.out.println(player.getUsername() + ": " + player.getScore() + " points");
-        });
-
         System.out.println("Restart the game? Y/N");
         String choice = scanner.next();
         scanner.nextLine();
@@ -44,16 +38,8 @@ public class GameOverState implements GameState {
             System.out.println("Invalid Input, Please try again...");
             renderCurrentState();
         }
-        
-        System.out.println("How would you like Game Report? (TXT/PDF/DOCX)");
-        choice = scanner.next();
-        scanner.nextLine();
 
-        System.out.println("Generating game report in " + choice + " format...");
-        GameReportCommand gameReportCommand = new GameReportCommand(gameEngine, choice);
-        gameReportCommand.execute();
-
-        System.out.println("\nPrinting game log to CSV...");
+        System.out.println("Printing game log to CSV...");
         
         GameOverCommand gameOverCommand = new GameOverCommand(gameEngine);
         gameOverCommand.execute();

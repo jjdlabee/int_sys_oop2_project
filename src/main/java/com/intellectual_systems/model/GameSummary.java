@@ -51,8 +51,8 @@ public class GameSummary {
                 sb.append(", ").append(playerNames.get(i));
             }
         }
-        // sb.append("\n\n Gameplay Summary:\n");
-        // sb.append("----------------\n\n");
+        sb.append("\n\n Gameplay Summary:\n");
+        sb.append("----------------\n\n");
         // for (int i = 0; i < turnList.size(); i++) {
         //     sb.append("Turn ").append(i + 1).append(": ").append(turnList.get(i)).append("\n");
         // }
