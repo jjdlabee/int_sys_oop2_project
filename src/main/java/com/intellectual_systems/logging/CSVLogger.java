@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  *
- * @author Jonathan
+ * @author Vinayak
  */
 public class CSVLogger {
     private final String filePath;
