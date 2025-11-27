@@ -30,6 +30,7 @@ public class GameSummary {
     }
 
     public void addTurn(Turn turn){
+
         this.turnList.add(turn.toString());
     }
 
@@ -53,6 +54,8 @@ public class GameSummary {
         }
         sb.append("\n\n Gameplay Summary:\n");
         sb.append("----------------\n\n");
+
+
         // for (int i = 0; i < turnList.size(); i++) {
         //     sb.append("Turn ").append(i + 1).append(": ").append(turnList.get(i)).append("\n");
         // }

@@ -33,16 +33,14 @@ public class GameReportCommand implements Command {
             DocxReportGenerator docxReportGenerator = new DocxReportGenerator();
             docxReportGenerator.generateReport("src/main/java/com/intellectual_systems/resources/game_report.docx", gameEngine.getGameSummary().toString());
         } else if(format.equalsIgnoreCase("PDF")) {
-            // PDF report generation can be implemented here
             PdfReportGenerator pdfReportGenerator = new PdfReportGenerator();
             pdfReportGenerator.generateReport("src/main/java/com/intellectual_systems/resources/game_report.pdf", gameEngine.getGameSummary().toString());
 
         } else {
             throw new IllegalArgumentException("Unsupported report format: " + format);
         }
-        // Implementation for generating game report in the specified format
+        
         System.out.println(gameEngine.getGameSummary().toString());
-        // Add logic to generate and save the report
 
         gameEngine.addSystemGameEvent("Generate Report");
         gameEngine.renderNextState();
