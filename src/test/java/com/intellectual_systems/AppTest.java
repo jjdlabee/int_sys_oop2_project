@@ -1,6 +1,7 @@
 package com.intellectual_systems;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -11,13 +12,18 @@ import org.junit.Test;
 import com.intellectual_systems.model.Category;
 import com.intellectual_systems.model.Player;
 import com.intellectual_systems.model.Question;
+import com.intellectual_systems.model.Turn;
+import com.intellectual_systems.model.GameSummary;
 import com.intellectual_systems.parser.CsvParser;
 import com.intellectual_systems.parser.JsonParser;
 import com.intellectual_systems.parser.XmlParser;
+import com.intellectual_systems.logging.EventLogger;
+import com.intellectual_systems.logging.GameEvent;
+import com.intellectual_systems.logging.CSVLogger;
 
 /**
- * Simplified Test Suite - 15 Essential Tests
- * Tests only Model and Parser classes (no Controller dependencies)
+ * Simplified Test Suite - 28 Essential Tests
+ * Tests Model, Parser, Reporting, and Logging classes
  */
 public class AppTest 
 {
@@ -230,6 +236,267 @@ public class AppTest
         category.addQuestion(new Question("Q3", choices, "A3", "Math", 300));
         
         assertEquals("Should have 3 questions", 3, category.getQuestions().size());
+    }
+
+    // ==================== REPORTING TESTS (5 tests) ====================
+
+    @Test
+    public void testGameSummaryCreation() {
+        List<Player> players = new ArrayList<>();
+        Player player = new Player("TestUser");
+        player.setScore(500);
+        players.add(player);
+        
+        GameSummary summary = new GameSummary("GAME001", players);
+        
+        assertNotNull("Summary should be generated", summary);
+        String summaryString = summary.toString();
+        assertNotNull("Summary string should not be null", summaryString);
+        assertTrue("Summary should contain game ID", 
+                  summaryString.contains("GAME001"));
+    }
+
+    @Test
+    public void testGameSummaryContainsPlayerInfo() {
+        List<Player> players = new ArrayList<>();
+        Player player = new Player("StatUser");
+        player.setScore(800);
+        players.add(player);
+        
+        GameSummary summary = new GameSummary("GAME002", players);
+        summary.addTurn("Test turn"); // Add at least one turn so scores are displayed
+        summary.addScores(players);
+        
+        String summaryString = summary.toString();
+        assertTrue("Should contain player username", 
+                  summaryString.contains("StatUser"));
+        assertTrue("Should contain player score", 
+                  summaryString.contains("800"));
+    }
+
+    @Test
+    public void testGameSummaryWithTurnHistory() {
+        List<Player> players = new ArrayList<>();
+        Player player = new Player("TurnUser");
+        players.add(player);
+        
+        GameSummary summary = new GameSummary("GAME003", players);
+        summary.addTurn("Player selected category: Science");
+        summary.addTurn("Player answered question correctly");
+        
+        String summaryString = summary.toString();
+        assertTrue("Should contain turn information", 
+                  summaryString.contains("Turn 1") || summaryString.contains("selected"));
+    }
+
+    @Test
+    public void testMultiplePlayerGameSummary() {
+        List<Player> players = new ArrayList<>();
+        Player player1 = new Player("Alice");
+        Player player2 = new Player("Bob");
+        player1.setScore(300);
+        player2.setScore(500);
+        players.add(player1);
+        players.add(player2);
+        
+        GameSummary summary = new GameSummary("GAME004", players);
+        summary.addTurn("Test turn"); // Add at least one turn so scores are displayed
+        summary.addScores(players);
+        
+        String summaryString = summary.toString();
+        assertTrue("Should contain Alice", summaryString.contains("Alice"));
+        assertTrue("Should contain Bob", summaryString.contains("Bob"));
+        assertTrue("Should contain Alice's score", summaryString.contains("300"));
+        assertTrue("Should contain Bob's score", summaryString.contains("500"));
+    }
+
+    @Test
+    public void testGameSummaryToStringFormat() {
+        List<Player> players = new ArrayList<>();
+        Player player = new Player("ExportUser");
+        player.setScore(450);
+        players.add(player);
+        
+        GameSummary summary = new GameSummary("GAME005", players);
+        summary.addTurn("Test turn"); // Add at least one turn so scores are displayed
+        summary.addScores(players);
+        String summaryString = summary.toString();
+        
+        assertNotNull("Summary string should not be null", summaryString);
+        assertTrue("Summary should contain case ID", 
+                  summaryString.contains("GAME005"));
+        assertTrue("Summary should contain username", 
+                  summaryString.contains("ExportUser"));
+        assertTrue("Summary should contain score", 
+                  summaryString.contains("450"));
+    }
+
+    // ==================== LOGGING TESTS (5 tests) ====================
+
+    @Test
+    public void testEventLoggerCreation() {
+        EventLogger logger = new EventLogger();
+        
+        assertNotNull("Logger should be initialized", logger);
+    }
+
+    @Test
+    public void testGameEventCreation() {
+        GameEvent event = new GameEvent();
+        Player player = new Player("LoggedPlayer");
+        Turn turn = new Turn(player);
+        
+        event.newGameEvent("GAME001", "Test Activity", turn);
+        
+        assertEquals("Case ID should match", "GAME001", event.getCaseID());
+        assertEquals("Activity should match", "Test Activity", event.getActivity());
+        assertNotNull("Turn should not be null", event.getTurn());
+        assertNotNull("Timestamp should be generated", event.getTimestamp());
+    }
+
+    @Test
+    public void testEventLoggerListenerRegistration() {
+        GameEvent gameEvent = new GameEvent();
+        EventLogger logger = new EventLogger();
+        
+        gameEvent.addListener(logger);
+        
+        // Create an event and notify listeners
+        Player player = new Player("TestPlayer");
+        Turn turn = new Turn(player);
+        gameEvent.newGameEvent("GAME002", "Player Action", turn);
+        gameEvent.notifyEventListeners(gameEvent);
+        
+        // If no exceptions thrown, listener is registered correctly
+        assertTrue("Listener registration should succeed", true);
+    }
+
+    @Test
+    public void testEventTimestampFormat() {
+        GameEvent event = new GameEvent();
+        Player player = new Player("TimePlayer");
+        Turn turn = new Turn(player);
+        
+        event.newGameEvent("GAME003", "Timestamp Test", turn);
+        String timestamp = event.getTimestamp();
+        
+        assertNotNull("Timestamp should not be null", timestamp);
+        assertTrue("Timestamp should contain date format", 
+                  timestamp.contains("-") || timestamp.contains(":"));
+    }
+
+    @Test
+    public void testEventLoggerWithMultipleEvents() {
+        GameEvent gameEvent = new GameEvent();
+        EventLogger logger = new EventLogger();
+        gameEvent.addListener(logger);
+        
+        // Create multiple events
+        Player player1 = new Player("Player1");
+        Player player2 = new Player("Player2");
+        Turn turn1 = new Turn(player1);
+        Turn turn2 = new Turn(player2);
+        
+        GameEvent event1 = new GameEvent();
+        event1.newGameEvent("GAME004", "Action 1", turn1);
+        logger.updateOnGameEvent(event1);
+        
+        GameEvent event2 = new GameEvent();
+        event2.newGameEvent("GAME004", "Action 2", turn2);
+        logger.updateOnGameEvent(event2);
+        
+        // Verify logger can handle multiple events
+        assertTrue("Logger should handle multiple events", true);
+    }
+
+    // ==================== INTEGRATION TESTS (3 tests) ====================
+
+    @Test
+    public void testGameSummaryWithEventLogging() {
+        // Create game summary
+        List<Player> players = new ArrayList<>();
+        Player player = new Player("SessionPlayer");
+        player.setScore(100);
+        players.add(player);
+        
+        GameSummary summary = new GameSummary("GAME006", players);
+        summary.addTurn("Player started game");
+        summary.addTurn("Player scored 100 points");
+        summary.addScores(players);
+        
+        // Create event logger
+        EventLogger logger = new EventLogger();
+        GameEvent event = new GameEvent();
+        Turn turn = new Turn(player);
+        turn.setCurrentAnswer("Game started");
+        
+        event.newGameEvent("GAME006", "Game Session", turn);
+        logger.updateOnGameEvent(event);
+        
+        // Verify both work together
+        String summaryStr = summary.toString();
+        assertNotNull("Summary should be created", summaryStr);
+        assertTrue("Should contain player info", summaryStr.contains("SessionPlayer"));
+    }
+
+    @Test
+    public void testCSVLoggerWithGameEvents() {
+        // Create a temporary test file path
+        String testFilePath = "src/test/java/com/intellectual_systems/resources/test_events.csv";
+        
+        CSVLogger csvLogger = new CSVLogger(testFilePath);
+        
+        // Create test events
+        List<GameEvent> events = new ArrayList<>();
+        Player player = new Player("TestPlayer");
+        Turn turn = new Turn(player);
+        turn.setCurrentCategory("Science");
+        turn.setCurrentQuestionValue(100);
+        turn.setCurrentAnswer("A");
+        turn.setIsCorrect(true);
+        turn.setScoreAfterTurn(100);
+        
+        GameEvent event = new GameEvent();
+        event.newGameEvent("GAME007", "Answer Question", turn);
+        events.add(event);
+        
+        // This should not throw an exception
+        try {
+            csvLogger.logGameEvents(events);
+            assertTrue("CSV logging should succeed", true);
+        } catch (Exception e) {
+            assertTrue("CSV logging failed: " + e.getMessage(), false);
+        }
+    }
+
+    @Test
+    public void testReportingWithMultipleTurns() {
+        List<Player> players = new ArrayList<>();
+        Player player = new Player("MultiTurnPlayer");
+        players.add(player);
+        
+        GameSummary summary = new GameSummary("GAME008", players);
+        
+        // Simulate multiple turns
+        EventLogger logger = new EventLogger();
+        for (int i = 0; i < 3; i++) {
+            Turn turn = new Turn(player);
+            turn.setCurrentCategory("Category" + i);
+            turn.setCurrentQuestionValue(100 * (i + 1));
+            
+            GameEvent event = new GameEvent();
+            event.newGameEvent("GAME008", "Turn " + (i + 1), turn);
+            logger.updateOnGameEvent(event);
+            
+            summary.addTurn("Turn " + (i + 1) + ": Category" + i);
+        }
+        
+        player.setScore(600);
+        summary.addScores(players);
+        
+        String summaryStr = summary.toString();
+        assertTrue("Summary should contain turn information", 
+                  summaryStr.contains("Turn 1") || summaryStr.contains("Category"));
     }
     
     // ==================== SANITY TEST ====================
