@@ -60,12 +60,9 @@ public class XmlParser implements GameDataParser {
                         for (int i = 0; i < optionNode.getChildNodes().getLength(); i++) {
                             char optionChar = (char)('A' + i);
                             choices.add(optionElement.getElementsByTagName("Option" + optionChar).item(0).getTextContent());
-                            System.out.println("Added choice Option " + optionChar + ": " + optionElement.getElementsByTagName("Option" + optionChar).item(0).getTextContent());
                         }
                     }
-
-                    System.out.println("Total choices added: " + choices.size());
-
+                    
                     Question question = new Question(
                         eElement.getElementsByTagName("QuestionText").item(0).getTextContent(), // questionText
                         choices, // choices
