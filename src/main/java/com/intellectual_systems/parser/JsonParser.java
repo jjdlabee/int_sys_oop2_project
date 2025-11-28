@@ -67,6 +67,7 @@ public class JsonParser implements GameDataParser {
             }
 
         } catch (IOException | ParseException e) {
+            e.printStackTrace(); // Add this for debugging
         }
         return categories;
     }

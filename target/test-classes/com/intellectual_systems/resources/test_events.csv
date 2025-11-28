@@ -1,0 +1,2 @@
+Case_ID,Player_ID,Activity,Timestamp,Category,Question_Value,Answer_Given,Result,Score_After_Turn
+GAME007,TestPlayer,Answer Question,2025-11-28T12:05:51,Science,100,A,Correct,100,
